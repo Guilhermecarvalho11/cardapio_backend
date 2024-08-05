@@ -1,4 +1,5 @@
 const AppError = require("../utils/AppError");
+const sequelizeConnection = require("../database/mySQL/index");
 
 class UserControllers {
   create(req, res) {

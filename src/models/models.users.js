@@ -1,44 +1,47 @@
 "use strict";
 
+const { QueryInterface } = require("sequelize");
+const { Sequelize } = require(".");
+const { down } = require("../migrations/20240805200421-create-users-table");
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("users", {
+  up: async (QueryInterface, Sequelize) => {
+    await QueryInterface.createTeable("users", {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allownull: false,
         autoIncrement: true,
         primaryKey: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allownull: false,
       },
       email: {
         type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
+        allownull: false,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allownull: false,
       },
       role: {
         type: Sequelize.ENUM("admin", "client"),
-        allowNull: false,
+        allownull: false,
       },
       created_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allownull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allownull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("users");
+  down: async (QueryInterface, Sequelize) => {
+    await QueryInterface.dropTable("users");
   },
 };
