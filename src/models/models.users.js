@@ -1,47 +1,48 @@
 "use strict";
 
-const { QueryInterface } = require("sequelize");
-const { Sequelize } = require(".");
-const { down } = require("../migrations/20240805200421-create-users-table");
-
-module.exports = {
-  up: async (QueryInterface, Sequelize) => {
-    await QueryInterface.createTeable("users", {
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define(
+    "User",
+    {
       id: {
-        type: Sequelize.INTEGER,
-        allownull: false,
+        type: DataTypes.INTEGER,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING,
-        allownull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       email: {
-        type: Sequelize.STRING,
-        allownull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
       },
       password: {
-        type: Sequelize.STRING,
-        allownull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       role: {
-        type: Sequelize.ENUM("admin", "client"),
-        allownull: false,
+        type: DataTypes.ENUM("admin", "client"),
+        allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allownull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
       },
-      updated_at: {
-        type: Sequelize.DATE,
-        allownull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
       },
-    });
-  },
-  down: async (QueryInterface, Sequelize) => {
-    await QueryInterface.dropTable("users");
-  },
+    },
+    {
+      tableName: "users",
+      timestamps: true,
+    }
+  );
+
+  return User;
 };
