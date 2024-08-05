@@ -1,5 +1,6 @@
 require("express-async-errors");
 const connectionDB = require("./database/mySQL");
+
 const AppError = require("./utils/AppError");
 
 const express = require("express");
