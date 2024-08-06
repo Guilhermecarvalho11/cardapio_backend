@@ -22,6 +22,11 @@ class UserControllers {
       throw new AppError("User não cadastrado");
     }
   }
+
+  async update(req, res) {
+    const { email, name, password } = req.body;
+    const { id } = req.params;
+  }
 }
 
 module.exports = UserControllers;
