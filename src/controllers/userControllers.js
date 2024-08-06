@@ -1,14 +1,26 @@
 const AppError = require("../utils/AppError");
+const modelUser = require("../models/models.users.js");
 const sequelizeConnection = require("../database/mySQL/index");
 
 class UserControllers {
-  create(req, res) {
+  async create(req, res) {
     const { email, name, password } = req.body;
-    console.log(email, name, password);
+
     if (!name) {
       throw new AppError("nome é obrigatorio");
     }
-    res.status(201).json({ email, name, password });
+    try {
+      const user = await modelUser.create({
+        email,
+        name,
+        password,
+        role: "client",
+      });
+      res.status(201).json(user);
+    } catch (error) {
+      console.error(error);
+      throw new AppError("User não cadastrado");
+    }
   }
 }
 
