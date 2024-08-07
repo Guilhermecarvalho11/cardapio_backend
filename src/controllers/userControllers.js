@@ -1,3 +1,4 @@
+const { hash } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const modelUser = require("../models/models.users.js");
 const sequelizeConnection = require("../database/mySQL/index");
@@ -9,11 +10,14 @@ class UserControllers {
     if (!name) {
       throw new AppError("nome é obrigatorio");
     }
+
+    const hashedPassword = await hash(password, 8);
+
     try {
       const user = await modelUser.create({
         email,
         name,
-        password,
+        password: hashedPassword,
         role: "client",
       });
       res.status(201).json(user);
@@ -27,7 +31,7 @@ class UserControllers {
     const { email, name, password } = req.body;
     const { id } = req.params;
 
-    if (!name) {
+    if (!name && !email) {
       throw new AppError("nenhum campo fornecido");
     }
 
