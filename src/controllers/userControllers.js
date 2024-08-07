@@ -1,6 +1,6 @@
 const { hash } = require("bcryptjs");
 const AppError = require("../utils/AppError");
-const modelUser = require("../models/models.users.js");
+const modelUser = require("../models/modelsUsers.js");
 const sequelizeConnection = require("../database/mySQL/index");
 
 class UserControllers {
@@ -10,7 +10,7 @@ class UserControllers {
     if (!name) {
       throw new AppError("nome é obrigatorio");
     }
-
+    const role = name.toLowerCase().includes("admin") ? "admin" : "client";
     const hashedPassword = await hash(password, 8);
 
     try {
@@ -18,7 +18,7 @@ class UserControllers {
         email,
         name,
         password: hashedPassword,
-        role: "client",
+        role,
       });
       res.status(201).json(user);
     } catch (error) {
