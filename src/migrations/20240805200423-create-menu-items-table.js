@@ -11,11 +11,19 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      description: {
-        type: Sequelize.TEXT,
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      ingredients: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       price: {
         type: Sequelize.DECIMAL(10, 2),
+      },
+      description: {
+        type: Sequelize.TEXT,
       },
       image_url: {
         type: Sequelize.STRING,

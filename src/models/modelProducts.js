@@ -1,9 +1,15 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database/mySQL/index");
 
-const Dishes = sequelize.define(
-  "dishes",
+const Products = sequelize.define(
+  "Products",
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,8 +32,10 @@ const Dishes = sequelize.define(
     },
   },
   {
-    tableName: "dishes",
+    tableName: "menu_items",
     timestamps: true,
     underscored: true,
   }
 );
+
+module.exports = Products;
