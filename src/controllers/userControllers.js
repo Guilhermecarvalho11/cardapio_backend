@@ -10,6 +10,7 @@ class UserControllers {
     if (!name) {
       throw new AppError("nome é obrigatorio");
     }
+
     const role = name.toLowerCase().includes("admin") ? "admin" : "client";
     const hashedPassword = await hash(password, 8);
 
