@@ -24,7 +24,7 @@ class UserControllers {
       res.status(201).json(user);
     } catch (error) {
       console.error(error);
-      throw new AppError("User não cadastrado");
+      throw new AppError("Usuário não cadastrado");
     }
   }
 
