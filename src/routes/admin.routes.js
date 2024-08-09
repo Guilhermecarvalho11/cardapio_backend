@@ -13,5 +13,6 @@ const productsControllers = new ProductsControllers();
 
 adminRoutes.post("/", myMiddleware, adminControllers.create);
 adminRoutes.post("/products", myMiddleware, productsControllers.create);
+adminRoutes.put("/products/:id", myMiddleware, productsControllers.update);
 
 module.exports = adminRoutes;

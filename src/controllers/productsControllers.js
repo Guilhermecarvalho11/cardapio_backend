@@ -19,6 +19,26 @@ class Products {
       throw new AppError("Produtos não cadastrados", 401);
     }
   }
+
+  async update(req, res) {
+    const { name, category, ingredients, price, description } = req.body;
+    const { id } = req.params;
+    try {
+      const productsUpdate = await modelProducts.findByPk(id);
+
+      await productsUpdate.update({
+        name: name,
+        category: category,
+        ingredients: ingredients,
+        price: price,
+        description: description,
+      });
+      res.status(201).json(productsUpdate);
+    } catch (error) {
+      console.log("o erro foi: ", error);
+      throw new AppError("Produto não atualizado");
+    }
+  }
 }
 
 module.exports = Products;
