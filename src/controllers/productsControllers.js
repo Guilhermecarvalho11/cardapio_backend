@@ -39,6 +39,20 @@ class Products {
       throw new AppError("Produto não atualizado");
     }
   }
+
+  async delete(req, res) {
+    const { name, category, ingredients, price, description } = req.body;
+    const { id } = req.params;
+
+    try {
+      const deleteProducts = await modelProducts.findByPk(id);
+      await deleteProducts.destroy(id);
+      res.status(201).json(deleteProducts);
+    } catch (error) {
+      console.log(error);
+      throw new AppError("Produto não deletado");
+    }
+  }
 }
 
 module.exports = Products;

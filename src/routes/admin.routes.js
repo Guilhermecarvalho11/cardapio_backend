@@ -14,5 +14,6 @@ const productsControllers = new ProductsControllers();
 adminRoutes.post("/", myMiddleware, adminControllers.create);
 adminRoutes.post("/products", myMiddleware, productsControllers.create);
 adminRoutes.put("/products/:id", myMiddleware, productsControllers.update);
+adminRoutes.delete("/products/:id", myMiddleware, productsControllers.delete);
 
 module.exports = adminRoutes;
