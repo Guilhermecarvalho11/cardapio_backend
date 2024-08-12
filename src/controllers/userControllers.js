@@ -11,6 +11,10 @@ class UserControllers {
       throw new AppError("nome é obrigatorio");
     }
 
+    if (req.body.password.length < 6) {
+      throw new AppError("Senha menor que 6 digitos");
+    }
+
     const role = name.toLowerCase().includes("admin") ? "admin" : "client";
     const hashedPassword = await hash(password, 8);
 
