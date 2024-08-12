@@ -12,7 +12,7 @@ class UserControllers {
     }
 
     if (req.body.password.length < 6) {
-      throw new AppError("Senha menor que 6 digitos");
+      throw new AppError("Digite uma senha maior que 6 caracteres");
     }
 
     const role = name.toLowerCase().includes("admin") ? "admin" : "client";
@@ -25,7 +25,7 @@ class UserControllers {
         password: hashedPassword,
         role,
       });
-      res.status(201).json(user);
+      return res.status(201).json(user);
     } catch (error) {
       console.error(error);
       throw new AppError("Usuário não cadastrado");
@@ -51,7 +51,7 @@ class UserControllers {
         name: name,
       });
 
-      res.status(200).json(user);
+      return res.status(200).json(user);
     } catch (error) {
       throw new AppError("erro ao atualizar o usuario", 500);
     }
