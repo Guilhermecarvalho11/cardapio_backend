@@ -10,23 +10,18 @@ class SessionsControllers {
       throw new AppError("Campos não preenchidos", 401);
     }
 
-    try {
-      const user = await modelUser.findOne({ where: { email: email } });
+    const user = await modelUser.findOne({ where: { email: email } });
 
-      const mathedPassword = await compare(password, user.password);
+    const mathedPassword = await compare(password, user.password);
 
-      if (!mathedPassword) {
-        throw new AppError("Email ou senha inválida", 401);
-      }
-
-      return res.status(201).json({
-        message: "Login realizado com sucesso!",
-        user: { email: user.email, password: user.password },
-      });
-    } catch (error) {
-      console.log(error);
-      throw new AppError("Não autenticado", 401);
+    if (!mathedPassword) {
+      throw new AppError("Email ou senha inválida", 401);
     }
+
+    return res.status(201).json({
+      message: "Login realizado com sucesso!",
+      user: user,
+    });
   }
 }
 
