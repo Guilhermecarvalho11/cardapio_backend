@@ -34,14 +34,14 @@ class UserControllers {
 
   async update(req, res) {
     const { email, name, password } = req.body;
-    const { id } = req.params;
+    const user_id = req.user.id;
 
     if (!name && !email) {
       throw new AppError("nenhum campo fornecido");
     }
 
     try {
-      const user = await modelUser.findByPk(id);
+      const user = await modelUser.findByPk(user_id);
 
       if (!user) {
         throw new AppError("usuário não encontrado", 401);

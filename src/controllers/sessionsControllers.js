@@ -26,11 +26,7 @@ class SessionsControllers {
       expiresIn,
     });
 
-    return res.status(201).json({
-      message: "Login realizado com sucesso!",
-      user: user,
-      token,
-    });
+    return res.status(201).json({ user: user, token });
   }
 }
 
