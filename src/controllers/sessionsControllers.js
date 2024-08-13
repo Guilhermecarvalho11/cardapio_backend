@@ -1,5 +1,7 @@
 const AppError = require("../utils/AppError");
 const modelUser = require("../models/modelsUsers.js");
+const authConfig = require("../config/jwtConfig.js");
+const { sign } = require("jsonwebtoken");
 const { compare } = require("bcryptjs");
 
 class SessionsControllers {
@@ -18,9 +20,16 @@ class SessionsControllers {
       throw new AppError("Email ou senha inválida", 401);
     }
 
+    const { secret, expiresIn } = authConfig.jwt;
+    const token = sign({}, secret, {
+      subject: String(user.id),
+      expiresIn,
+    });
+
     return res.status(201).json({
       message: "Login realizado com sucesso!",
       user: user,
+      token,
     });
   }
 }
