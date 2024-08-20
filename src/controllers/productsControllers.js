@@ -3,10 +3,9 @@ const modelProducts = require("../models/modelProducts");
 
 class Products {
   async index(req, res) {
-    const { id } = req.params;
     try {
-      const products = await modelProducts.findAll(id);
-      return res.status(200).json(products); // Use status 200 para listagem
+      const products = await modelProducts.findAll();
+      return res.status(200).json(products);
     } catch (erro) {
       console.log(erro);
       throw new AppError("Erro ao listar produtos", 401);
@@ -52,13 +51,16 @@ class Products {
   }
 
   async delete(req, res) {
-    const { name, category, ingredients, price, description } = req.body;
     const { id } = req.params;
 
     try {
       const deleteProducts = await modelProducts.findByPk(id);
-      await deleteProducts.destroy(id);
-      res.status(201).json(deleteProducts);
+      if (!deleteProducts) {
+        throw new AppError("Produto não encontrado", 404);
+      }
+      await deleteProducts.destroy();
+      console.log("Produto deletado com sucesso!");
+      res.status(200).json(deleteProducts);
     } catch (error) {
       console.log(error);
       throw new AppError("Produto não deletado");

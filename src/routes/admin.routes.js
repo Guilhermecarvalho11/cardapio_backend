@@ -22,6 +22,10 @@ adminRoutes.post(
 );
 adminRoutes.get("/products", productsControllers.index);
 adminRoutes.put("/products/:id", productsControllers.update);
-adminRoutes.delete("/products/:id", productsControllers.delete);
+adminRoutes.delete(
+  "/products/:id",
+  verifyUserAuth("admin"),
+  productsControllers.delete
+);
 
 module.exports = adminRoutes;
