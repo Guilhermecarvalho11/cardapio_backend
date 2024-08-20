@@ -4,7 +4,7 @@ const authConfig = require("../config/jwtConfig");
 
 function ensureAuthenticated(req, res, next) {
   const authHeader = req.headers.authorization;
-  console.log(authHeader);
+  console.log("authHeader", authHeader);
 
   if (!authHeader) {
     throw new AppError("JWT não informado", 401);

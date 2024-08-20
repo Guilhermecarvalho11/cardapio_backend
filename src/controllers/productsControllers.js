@@ -2,6 +2,17 @@ const AppError = require("../utils/AppError");
 const modelProducts = require("../models/modelProducts");
 
 class Products {
+  async index(req, res) {
+    const { id } = req.params;
+    try {
+      const products = await modelProducts.findAll(id);
+      return res.status(200).json(products); // Use status 200 para listagem
+    } catch (erro) {
+      console.log(erro);
+      throw new AppError("Erro ao listar produtos", 401);
+    }
+  }
+
   async create(req, res) {
     const { name, category, ingredients, price, description } = req.body;
     try {
@@ -17,16 +28,6 @@ class Products {
     } catch (error) {
       console.log(error);
       throw new AppError("Produtos não cadastrados", 401);
-    }
-  }
-
-  async index(req, res) {
-    try {
-      const products = await modelProducts.findAll();
-      return res.json(products);
-    } catch (erro) {
-      console.log(erro);
-      throw new AppError("Erro ao listar produtos", 401);
     }
   }
 

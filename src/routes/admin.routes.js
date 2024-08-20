@@ -13,10 +13,13 @@ const adminControllers = new AdminControllers();
 const productsControllers = new ProductsControllers();
 
 adminRoutes.use(ensureAuthenticated);
-adminRoutes.use(verifyUserAuth("admin"));
 
 adminRoutes.post("/", adminControllers.create);
-adminRoutes.post("/products", productsControllers.create);
+adminRoutes.post(
+  "/products",
+  verifyUserAuth("admin"),
+  productsControllers.create
+);
 adminRoutes.get("/products", productsControllers.index);
 adminRoutes.put("/products/:id", productsControllers.update);
 adminRoutes.delete("/products/:id", productsControllers.delete);
