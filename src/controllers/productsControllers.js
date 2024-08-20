@@ -20,6 +20,16 @@ class Products {
     }
   }
 
+  async index(req, res) {
+    try {
+      const products = await modelProducts.findAll();
+      return res.json(products);
+    } catch (erro) {
+      console.log(erro);
+      throw new AppError("Erro ao listar produtos", 401);
+    }
+  }
+
   async update(req, res) {
     const { name, category, ingredients, price, description } = req.body;
     const { id } = req.params;

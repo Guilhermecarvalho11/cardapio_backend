@@ -4,6 +4,7 @@ const authConfig = require("../config/jwtConfig");
 
 function ensureAuthenticated(req, res, next) {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
 
   if (!authHeader) {
     throw new AppError("JWT não informado", 401);
@@ -13,10 +14,13 @@ function ensureAuthenticated(req, res, next) {
   console.log("Token recebido:", token);
 
   try {
-    const { sub: user_id } = verify(token, authConfig.jwt.secret);
+    const { role, sub: user_id } = verify(token, authConfig.jwt.secret);
+    console.log("Role decodificada:", role);
+    console.log("User ID decodificado:", user_id);
 
     req.user = {
       id: Number(user_id),
+      role,
     };
 
     return next();

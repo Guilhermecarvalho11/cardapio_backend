@@ -15,7 +15,6 @@ class UserControllers {
       throw new AppError("Digite uma senha maior que 6 caracteres");
     }
 
-    const role = name.toLowerCase().includes("admin") ? "admin" : "client";
     const hashedPassword = await hash(password, 8);
 
     try {
@@ -23,7 +22,6 @@ class UserControllers {
         email,
         name,
         password: hashedPassword,
-        role,
       });
       return res.status(201).json(user);
     } catch (error) {
