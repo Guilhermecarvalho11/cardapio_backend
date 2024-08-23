@@ -33,6 +33,8 @@ class Products {
   async update(req, res) {
     const { name, category, ingredients, price, description } = req.body;
     const { id } = req.params;
+    console.log("id_PARAMS", id);
+
     try {
       const productsUpdate = await modelProducts.findByPk(id);
 

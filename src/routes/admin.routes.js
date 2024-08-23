@@ -13,6 +13,7 @@ const adminControllers = new AdminControllers();
 const productsControllers = new ProductsControllers();
 
 adminRoutes.use(ensureAuthenticated);
+adminRoutes.get("/products/:id", productsControllers.index);
 
 adminRoutes.post("/", adminControllers.create);
 adminRoutes.post(
@@ -20,8 +21,11 @@ adminRoutes.post(
   verifyUserAuth("admin"),
   productsControllers.create
 );
-adminRoutes.get("/products", productsControllers.index);
-adminRoutes.put("/products/:id", productsControllers.update);
+adminRoutes.put(
+  "/products/:id",
+  verifyUserAuth("admin"),
+  productsControllers.update
+);
 adminRoutes.delete(
   "/products/:id",
   verifyUserAuth("admin"),
