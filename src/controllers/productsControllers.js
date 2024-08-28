@@ -1,5 +1,6 @@
 const AppError = require("../utils/AppError");
 const modelProducts = require("../models/modelProducts");
+const path = require("path");
 
 class Products {
   async index(req, res) {
@@ -15,7 +16,16 @@ class Products {
   async create(req, res) {
     const { name, category, ingredients, price, description } = req.body;
     try {
+      const { file } = req;
+
+      if (!file) {
+        throw new AppError("Imagem é obrigatoria");
+      }
+
+      const imageURL = path.join("/uploads", file.filename);
+
       const products = await modelProducts.create({
+        image_url: imageURL,
         name,
         category,
         ingredients,

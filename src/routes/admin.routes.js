@@ -7,7 +7,7 @@ const AdminControllers = require("../controllers/adminControllers");
 const verifyUserAuth = require("../middlewere/verifyUserAuth");
 
 const adminRoutes = Router();
-// const upload = multer(upLoadConfig.MULTER);
+const upload = multer(upLoadConfig.MULTER);
 
 const adminControllers = new AdminControllers();
 const productsControllers = new ProductsControllers();
@@ -16,11 +16,14 @@ adminRoutes.use(ensureAuthenticated);
 adminRoutes.get("/products/:id", productsControllers.index);
 
 adminRoutes.post("/", adminControllers.create);
+
 adminRoutes.post(
   "/products",
   verifyUserAuth("admin"),
+  upload.single("image"),
   productsControllers.create
 );
+
 adminRoutes.put(
   "/products/:id",
   verifyUserAuth("admin"),
