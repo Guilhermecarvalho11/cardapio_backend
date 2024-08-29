@@ -1,3 +1,4 @@
+const path = require("path");
 require("express-async-errors");
 const connectionDB = require("./database/mySQL");
 const cors = require("cors");
@@ -8,11 +9,17 @@ const express = require("express");
 const routes = require("./routes");
 
 const app = express();
-app.use(cors());
 
+app.use(
+  "/uploads",
+  express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
+);
+
+app.use(cors());
 app.use(express.json());
 
 app.use(routes);
+
 app.use((error, req, res, next) => {
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({

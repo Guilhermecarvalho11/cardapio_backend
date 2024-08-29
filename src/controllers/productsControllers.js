@@ -22,7 +22,7 @@ class Products {
         throw new AppError("Imagem é obrigatoria");
       }
 
-      const imageURL = path.join("/uploads", file.filename);
+      const imageURL = path.join("/uploads", file.filename).replace(/\\/g, "/");
 
       const products = await modelProducts.create({
         image_url: imageURL,
