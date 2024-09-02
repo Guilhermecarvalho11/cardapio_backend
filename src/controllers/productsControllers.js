@@ -17,12 +17,14 @@ class Products {
     const { name, category, ingredients, price, description } = req.body;
     try {
       const { file } = req;
-
+      console.log("File:", file);
       if (!file) {
         throw new AppError("Imagem é obrigatoria");
       }
 
+      // Gera a URL da imagem diretamente
       const imageURL = path.join("/uploads", file.filename).replace(/\\/g, "/");
+      console.log("Image URL:", imageURL);
 
       const products = await modelProducts.create({
         image_url: imageURL,
