@@ -45,7 +45,7 @@ Breve descrição do projeto e seu propósito.
 4.  Instale o Sequelize e o driver do MySQL:
 
     ```bash
-    npm install sequelize sequelize-cli mysql2:
+    npm install sequelize sequelize-cli mysql2
 
     ```
 

@@ -15,7 +15,7 @@ const Products = sequelize.define(
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(19),
       allowNull: false,
     },
     category: {

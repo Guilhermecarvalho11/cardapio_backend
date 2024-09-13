@@ -10,10 +10,7 @@ const routes = require("./routes");
 
 const app = express();
 
-app.use(
-  "/uploads",
-  express.static(path.resolve(__dirname, "..", "tmp", "uploads"))
-);
+app.use("/uploads", express.static(path.resolve(__dirname, "tmp", "uploads")));
 
 app.use(cors());
 app.use(express.json());
