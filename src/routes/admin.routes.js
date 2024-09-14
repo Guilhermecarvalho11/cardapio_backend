@@ -27,6 +27,7 @@ adminRoutes.post(
 adminRoutes.put(
   "/products/:id",
   verifyUserAuth("admin"),
+  upload.single("image"),
   productsControllers.update
 );
 adminRoutes.delete(

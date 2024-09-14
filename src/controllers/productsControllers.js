@@ -1,6 +1,7 @@
 const AppError = require("../utils/AppError");
 const modelProducts = require("../models/modelProducts");
 const path = require("path");
+const fs = require("fs");
 
 class Products {
   async index(req, res) {
@@ -57,6 +58,22 @@ class Products {
         price: price,
         description: description,
       });
+
+      if (req.file) {
+        const imageFile = req.file;
+        const imageUrl = path.join("/uploads", imageFile.filename); // Caminho para a imagem
+
+        // Remover imagem
+        if (productsUpdate.image_url) {
+          const oldImagePath = path.join(
+            "/uploads",
+            path.basename(productsUpdate.image_url)
+          );
+          fs.unlinkSync(oldImagePath);
+        }
+
+        await productsUpdate.update({ image_url: imageUrl });
+      }
       res.status(201).json(productsUpdate);
     } catch (error) {
       console.log("o erro foi: ", error);
