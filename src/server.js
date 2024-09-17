@@ -1,4 +1,5 @@
 const path = require("path");
+require("dotenv/config.js");
 require("express-async-errors");
 const connectionDB = require("./database/mySQL");
 const cors = require("cors");
