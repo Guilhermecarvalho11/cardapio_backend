@@ -1,5 +1,5 @@
 const path = require("path");
-require("dotenv/config.js");
+require("dotenv").config();
 require("express-async-errors");
 const connectionDB = require("./database/mySQL");
 const cors = require("cors");
@@ -37,4 +37,3 @@ app.use((error, req, res, next) => {
 const PORT = process.env.SERVER_PORT;
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
-console.log("PORT", PORT);
