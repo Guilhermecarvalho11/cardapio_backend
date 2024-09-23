@@ -5,17 +5,27 @@ const connectionDB = require("./database/mySQL");
 const cors = require("cors");
 
 const AppError = require("./utils/AppError");
-
 const express = require("express");
 const routes = require("./routes");
 
 const app = express();
 
+// Configuração de CORS para permitir apenas a URL do frontend
+const allowedOrigins = [
+  "https://seu-frontend-url.vercel.app", // Substitua pela URL do seu frontend
+  "http://localhost:3000", // Para desenvolvimento local
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Métodos permitidos
+    credentials: true, // Se necessário, permite cookies e autenticação
+  })
+);
+
 app.use("/uploads", express.static(path.resolve(__dirname, "tmp", "uploads")));
-
-app.use(cors());
 app.use(express.json());
-
 app.use(routes);
 
 app.use((error, req, res, next) => {
