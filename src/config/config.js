@@ -7,7 +7,7 @@ module.exports = {
     database: process.env.DB_NAME_DEVELOPMENT,
     host: process.env.DB_HOST,
     dialect: "postgres", // Alterado para PostgreSQL
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
         require: true, // Habilita a conexão SSL
@@ -21,7 +21,7 @@ module.exports = {
     database: process.env.DB_NAME_TEST,
     host: process.env.DB_HOST,
     dialect: "postgres", // Alterado para PostgreSQL
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
         require: true, // Habilita a conexão SSL
@@ -35,7 +35,7 @@ module.exports = {
     database: process.env.DB_NAME_PRODUCTION,
     host: process.env.DB_HOST,
     dialect: "postgres", // Alterado para PostgreSQL
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
         require: true, // Habilita a conexão SSL
