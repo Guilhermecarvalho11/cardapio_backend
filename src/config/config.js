@@ -7,6 +7,12 @@ module.exports = {
     database: process.env.DB_NAME_DEVELOPMENT,
     host: process.env.DB_HOST,
     dialect: "postgres", // Alterado para PostgreSQL
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
     port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
