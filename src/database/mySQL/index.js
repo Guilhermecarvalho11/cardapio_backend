@@ -18,7 +18,7 @@ const sequelize = new Sequelize(
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false, // Apenas para ambientes de desenvolvimento
+        rejectUnauthorized: true, // Apenas para ambientes de desenvolvimento
       },
     },
   }
@@ -28,7 +28,6 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
-    return sequelize.sync({ force: true });
   })
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
