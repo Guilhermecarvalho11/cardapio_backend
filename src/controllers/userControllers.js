@@ -11,16 +11,13 @@ class UserControllers {
       throw new AppError("nome é obrigatorio");
     }
 
-    if (req.body.password.length < 6) {
-      throw new AppError("Digite uma senha maior que 6 caracteres");
+    if (!password || password.length < 6) {
+      throw new AppError("A senha deve ter no mínimo 6 caracteres");
     }
 
     const hashedPassword = await hash(password, 8);
 
-    let userRole = "client";
-    if (name === "admin") {
-      userRole = "admin";
-    }
+    const userRole = name.toLowerCase() === "admin" ? "admin" : "client";
 
     try {
       const user = await modelUser.create({
@@ -31,6 +28,9 @@ class UserControllers {
       });
       return res.status(201).json(user);
     } catch (error) {
+      if (error.name === "SequelizeUniqueConstraintError") {
+        throw new AppError("Email já cadastrado");
+      }
       console.error(error);
       throw new AppError("Usuário não cadastrado", error);
     }
