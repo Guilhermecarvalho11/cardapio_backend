@@ -4,7 +4,7 @@ module.exports = {
   development: {
     username: process.env.DB_USER || "dbcardapio_m6ph_user",
     password: process.env.DB_PASSWORD || "tGy9w3cmuFx9Rg2Vv1zQcNwKIKzYomt8",
-    database: process.env.DB_NAME_DEVELOPMENT,
+    database: process.env.DB_NAME,
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
@@ -26,7 +26,7 @@ module.exports = {
   test: {
     username: process.env.DB_USER || "dbcardapio_m6ph_user",
     password: process.env.DB_PASSWORD || "tGy9w3cmuFx9Rg2Vv1zQcNwKIKzYomt8",
-    database: process.env.DB_NAME_TEST,
+    database: process.env.DB_NAME,
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
@@ -42,7 +42,7 @@ module.exports = {
   production: {
     username: process.env.DB_USER || "dbcardapio_m6ph_user",
     password: process.env.DB_PASSWORD || "tGy9w3cmuFx9Rg2Vv1zQcNwKIKzYomt8",
-    database: process.env.DB_NAME_PRODUCTION,
+    database: process.env.DB_NAME,
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
