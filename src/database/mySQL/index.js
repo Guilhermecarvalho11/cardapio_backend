@@ -1,28 +1,29 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-const config = require("../../config/config")[
-  process.env.NODE_ENV || "development"
-];
-
-console.log("Configuração carregada:", config);
-console.log("node", process.env.NODE_ENV);
 
 const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: config.host,
-    dialect: config.dialect,
-    port: config.port,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+    port: process.env.DB_PORT,
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: true, // Apenas para ambientes de desenvolvimento
+        rejectUnauthorized: false, // Deve ser false em ambientes de produção com Render
       },
     },
   }
 );
+
+console.log({
+  host: process.env.DB_HOST,
+  name: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+});
 
 sequelize
   .authenticate()
