@@ -17,11 +17,17 @@ class UserControllers {
 
     const hashedPassword = await hash(password, 8);
 
+    let userRole = "client";
+    if (name === "admin") {
+      userRole = "admin";
+    }
+
     try {
       const user = await modelUser.create({
         email,
         name,
         password: hashedPassword,
+        role: userRole,
       });
       return res.status(201).json(user);
     } catch (error) {
