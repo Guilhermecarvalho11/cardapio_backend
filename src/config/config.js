@@ -8,7 +8,7 @@ module.exports = {
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
-    dialect: process.env.DB_DIALECT || "postgres",
+    dialect: "postgres",
     port: process.env.DB_PORT || 5432,
     pool: {
       max: 10,
@@ -30,7 +30,7 @@ module.exports = {
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
-    dialect: process.env.DB_DIALECT || "postgres",
+    dialect: "postgres",
     port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
@@ -46,11 +46,11 @@ module.exports = {
     host:
       process.env.DB_HOST ||
       "dpg-crovci08fa8c73dq4570-a.oregon-postgres.render.com",
-    dialect: process.env.DB_DIALECT || "postgres",
+    dialect: "postgres",
     port: process.env.DB_PORT || 5432,
     dialectOptions: {
       ssl: {
-        require: true,
+        require: false,
         rejectUnauthorized: false,
       },
     },

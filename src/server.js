@@ -1,7 +1,8 @@
+const sequelize = require("./database/postgres");
 const path = require("path");
 require("dotenv").config();
 require("express-async-errors");
-const connectionDB = require("./database/mySQL");
+const connectionDB = require("./database/postgres");
 const cors = require("cors");
 
 const AppError = require("./utils/AppError");
@@ -44,6 +45,20 @@ app.use((error, req, res, next) => {
   });
 });
 
+const runMigrations = async () => {
+  try {
+    await sequelize.sync({ force: false });
+    console.log("Tabelas geradas com sucesso.");
+  } catch (error) {
+    console.error("Erro ao rodar as migrations:", error);
+  }
+};
+
 const PORT = process.env.SERVER_PORT;
 
-app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
+(async () => {
+  await runMigrations();
+  app.listen(PORT, () => {
+    console.log(`Server is running on Port ${PORT}`);
+  });
+})();

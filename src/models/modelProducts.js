@@ -1,5 +1,5 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const sequelize = require("../database/mySQL/index");
+const sequelize = require("../database/postgres/index");
 
 const Products = sequelize.define(
   "Products",

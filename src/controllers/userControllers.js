@@ -1,7 +1,7 @@
 const { hash } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const modelUser = require("../models/modelsUsers.js");
-const sequelizeConnection = require("../database/mySQL/index");
+const sequelizeConnection = require("../database/postgres/index");
 
 class UserControllers {
   async create(req, res) {

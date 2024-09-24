@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../database/mySQL/index");
+const sequelize = require("../database/postgres/index");
 
 const User = sequelize.define(
   "User",

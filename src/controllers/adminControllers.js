@@ -1,4 +1,4 @@
-const sequelize = require("../database/mySQL");
+const sequelize = require("../database/postgres");
 const AppError = require("../utils/AppError");
 const modelsUsers = require("../models/modelsUsers");
 
