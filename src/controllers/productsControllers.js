@@ -25,7 +25,6 @@ class Products {
 
       // Gera a URL da imagem diretamente
       const imageURL = path.join("/uploads", file.filename).replace(/\\/g, "/");
-      console.log("Image URL:", imageURL);
 
       const products = await modelProducts.create({
         image_url: imageURL,
@@ -46,22 +45,21 @@ class Products {
   async update(req, res) {
     const { name, category, ingredients, price, description } = req.body;
     const { id } = req.params;
-    console.log("id_PARAMS", id);
 
     try {
       const productsUpdate = await modelProducts.findByPk(id);
 
       await productsUpdate.update({
-        name: name,
-        category: category,
-        ingredients: ingredients,
-        price: price,
-        description: description,
+        name,
+        category,
+        ingredients,
+        price,
+        description,
       });
 
       if (req.file) {
         const imageFile = req.file;
-        const imageUrl = path.join("/uploads", imageFile.filename); // Caminho para a imagem
+        const imageUrl = path.join("/uploads", imageFile.filename);
 
         // Remover imagem
         if (productsUpdate.image_url) {
@@ -69,14 +67,19 @@ class Products {
             "/uploads",
             path.basename(productsUpdate.image_url)
           );
-          fs.unlinkSync(oldImagePath);
+
+          if (fs.existsSync(oldImagePath)) {
+            fs.unlinkSync(oldImagePath);
+          } else {
+            console.log(`O arquivo ${oldImagePath} não existe.`);
+          }
         }
 
         await productsUpdate.update({ image_url: imageUrl });
       }
       res.status(201).json(productsUpdate);
     } catch (error) {
-      console.log("o erro foi: ", error);
+      console.log("Erro:", error);
       throw new AppError("Produto não atualizado");
     }
   }
