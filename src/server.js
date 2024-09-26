@@ -13,7 +13,7 @@ const app = express();
 
 // Configuração de CORS para permitir apenas a URL do frontend
 const allowedOrigins = [
-  "https://simpsonsnack.vercel.app/", // frontend
+  "https://simpsonsnack.vercel.app", // frontend
   "http://localhost:5173", //  local
   "https://cardapio-backend-5udy.onrender.com", // backend
 ];
