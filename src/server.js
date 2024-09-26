@@ -13,9 +13,9 @@ const app = express();
 
 // Configuração de CORS para permitir apenas a URL do frontend
 const allowedOrigins = [
-  "https://seu-frontend-url.vercel.app", // Substitua pela URL do seu frontend
-  "http://localhost:5173", // Para desenvolvimento local
-  "https://cardapio-backend-5udy.onrender.com", // url backend
+  "https://simpsonsnack.vercel.app/", // frontend
+  "http://localhost:5173", //  local
+  "https://cardapio-backend-5udy.onrender.com", // backend
 ];
 
 app.use(
