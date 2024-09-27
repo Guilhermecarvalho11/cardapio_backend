@@ -1,72 +1,56 @@
-# Nome do Projeto
+# Clone o repositório:
 
-Breve descrição do projeto e seu propósito.
+git clone https://github.com/Guilhermecarvalho11/cardapio_backend.git
 
-## Índice
+# Navegue até o diretório do projeto:
 
-- [Instalação](#instalação)
-- [Uso](#uso)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
-- [Autores](#autores)
-- [Agradecimentos](#agradecimentos)
+cd backend
 
-## Instalação
+# Instale as dependências:
 
-### Pré-requisitos
+npm install
 
-- [Node.js](https://nodejs.org/) (v12.0.0 ou superior)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-- [MySQL] (ou outro banco de dados compatível com Sequelize)
+# Instale o Sequelize e o driver do PostgreSQL:
 
-### Passos
+npm install sequelize sequelize-cli pg pg-hstore
 
-1.  Clone o repositório:
+# Crie um banco de dados no PostgreSQL:
 
-    ```bash
-    git clone https://github.com/Guilhermecarvalho11/cardapio_backend.git
+CREATE DATABASE cardapio_db;
 
-    ```
+# Configure as variáveis de ambiente:
 
-2.  Navegue até o diretório do projeto:
+Renomeie o arquivo .env.example para .env.
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASS=
+JWT_SECRET=
 
-    ```bash
-    cd backend
+# Execute as migrações para criar as tabelas no banco de dados:
 
-    ```
+npx sequelize-cli db:migrate
 
-3.  Instale as dependências:
+# Para iniciar o servidor de desenvolvimento, execute:
 
-    ```bash
-    npm install
-
-    ```
-
-4.  Instale o Sequelize e o driver do MySQL:
-
-    ```bash
-    npm install sequelize sequelize-cli mysql2
-
-    ```
-
-5.  Crie o banco de dados no MySQL, se ainda não estiver criado:
-    ```bash
-        npx sequelize-cli db:create
-    ```
-
-6.Execute as migrações para criar as tabelas no banco de dados:
-
-```bash
-      npx sequelize-cli db:migrate
-
-```
-
-## Uso
-
-### Ambiente de Desenvolvimento
-
-Para iniciar o servidor de desenvolvimento, execute:
-
-```bash
 npm start
-```
+
+A API estará disponível em http://localhost:3000.
+
+# Comandos Úteis
+
+Rodar migrações: npx sequelize-cli db:migrate
+Reverter migração: npx sequelize-cli db:migrate:undo
+
+Contribuição
+
+# Fork este repositório.
+
+Crie uma branch (git checkout -b feature-nova-funcionalidade).
+Commit suas mudanças (git commit -m 'Adiciona nova funcionalidade').
+Push a branch (git push origin feature-nova-funcionalidade).
+
+# Autor
+
+Guilherme Carvalho
